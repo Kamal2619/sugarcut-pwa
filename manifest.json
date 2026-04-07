@@ -1,0 +1,24 @@
+{
+  "name": "SugarCut - Pulse System",
+  "short_name": "SugarCut",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#09090e",
+  "theme_color": "#00e5ff",
+  "description": "Personalized AI Sugar Intake Tracker — Cut sugar, track streaks, scan food with Gemini AI.",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2309090e'/%3E%3Ccircle cx='50' cy='50' r='35' fill='none' stroke='%2300e5ff' stroke-width='4'/%3E%3Ctext x='50' y='58' font-family='Arial' font-weight='bold' font-size='28' fill='%2300e5ff' text-anchor='middle'%3ESC%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2309090e'/%3E%3Ccircle cx='50' cy='50' r='35' fill='none' stroke='%2300e5ff' stroke-width='4'/%3E%3Ctext x='50' y='58' font-family='Arial' font-weight='bold' font-size='28' fill='%2300e5ff' text-anchor='middle'%3ESC%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

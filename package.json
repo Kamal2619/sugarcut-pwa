@@ -1,0 +1,16 @@
+{
+  "name": "sugar-cut",
+  "version": "1.0.0",
+  "description": "SugarCut - AI-powered sugar tracker PWA",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": "20.x"
+  }
+}
