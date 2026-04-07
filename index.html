@@ -3,41 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SugarCut - Pulse System</title>
-    <meta name="description" content="AI-powered sugar tracker. Cut sugar, build streaks, and scan food with Gemini AI.">
+    <title>SugarCut — Personal Intelligence</title>
+    <meta name="description" content="Your private AI metabolic coach. Learns your patterns, eliminates sugar, adapts to your routine.">
     <meta name="theme-color" content="#00e5ff">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
-    <!-- Three.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-    <!-- Background 3D Canvas -->
+
     <canvas id="three-canvas"></canvas>
-    
-    <!-- Ambient glow layers -->
     <div class="ambient-glow cyan-glow"></div>
     <div class="ambient-glow purple-glow"></div>
 
     <header class="cyber-header glass-panel">
         <h1 class="logo">SGR<span>CUT</span></h1>
-        <div class="system-status">
-            <span class="pulse-dot"></span>
-            SYS: ACTIVE
+        <div class="header-right">
+            <div class="risk-badge" id="header-risk-badge" title="Current Sugar Risk Score">
+                <span class="risk-badge-label">RISK</span>
+                <span class="risk-badge-value" id="header-risk-value">--</span>
+            </div>
+            <div class="system-status">
+                <span class="pulse-dot"></span>
+                AI: ONLINE
+            </div>
         </div>
     </header>
 
     <main id="app-container">
-        <!-- Dashboard Section -->
+
+        <!-- ═══════════════════════════════ CORE ═══════════════════════════════ -->
         <section id="dashboard" class="view active">
-            <!-- Central 3D space placeholder in UI layout -->
             <div class="hero-3d-spacer">
                 <div class="hero-labels">
                     <span class="neon-label green" id="streak-status-label">OPTIMAL</span>
@@ -46,7 +47,17 @@
                 </div>
             </div>
 
-            <!-- Log Clean Day Button -->
+            <!-- Today's sugar mini-bar -->
+            <div class="today-summary glass-panel">
+                <div class="today-summary-header">
+                    <span class="today-label">TODAY'S SUGAR INTAKE</span>
+                    <span class="today-value"><span id="dash-today-sugar">0</span>g <span class="today-limit">/ 50g limit</span></span>
+                </div>
+                <div class="mini-progress-track">
+                    <div class="mini-progress-fill" id="dash-today-bar"></div>
+                </div>
+            </div>
+
             <button id="log-day-btn" class="cyber-btn log-btn">
                 <span class="log-btn-icon">✓</span>
                 LOG CLEAN DAY
@@ -71,7 +82,7 @@
                 </div>
                 <div class="insight-text">
                     <h3>AI NEURAL INSIGHT</h3>
-                    <p id="ai-insight-text">Awaiting telemetry. Log your first clean day to begin streak analysis.</p>
+                    <p id="ai-insight-text">Awaiting telemetry. Log your first clean day to begin analysis.</p>
                 </div>
             </div>
 
@@ -84,20 +95,20 @@
             </div>
         </section>
 
-        <!-- AI Scanner Section -->
+        <!-- ═══════════════════════════════ SCAN ═══════════════════════════════ -->
         <section id="ai-analyzer" class="view">
             <h2 class="section-title text-center">Neural Scan</h2>
             <div class="card glass-panel scan-card">
-                <p class="subtitle text-center">Uplink visual telemetry for composition analysis.</p>
-                
+                <p class="subtitle text-center">Upload food image or describe it. Your AI model will analyze sugar content and log the result.</p>
+
                 <div class="fruit-3d-icons">
-                    <div class="css-fruit css-apple" data-fill="apple"></div>
-                    <div class="css-fruit css-orange" data-fill="orange"></div>
-                    <div class="css-fruit css-donut" data-fill="donut"></div>
+                    <div class="css-fruit css-apple"></div>
+                    <div class="css-fruit css-orange"></div>
+                    <div class="css-fruit css-donut"></div>
                 </div>
 
                 <div class="input-group file-group neon-border">
-                    <label for="food-image" class="file-btn glow-purple-btn" id="food-image-label">
+                    <label for="food-image" class="file-btn">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         <span>INITIALIZE OPTICS</span>
                         <input type="file" id="food-image" accept="image/*">
@@ -106,7 +117,7 @@
                 </div>
 
                 <div class="input-group">
-                    <textarea id="food-text" class="neon-input text-console" placeholder="> MANUAL OVERRIDE OVERLAY INPUT..."></textarea>
+                    <textarea id="food-text" class="neon-input text-console" placeholder="> MANUAL OVERRIDE — describe food item..."></textarea>
                 </div>
 
                 <button id="analyze-btn" class="cyber-btn primary">EXECUTE ANALYSIS</button>
@@ -116,34 +127,163 @@
                 <span class="neon-label purple">OUTPUT CONSOLE</span>
                 <p id="ai-verdict" class="bold-alert glow-text">Awaiting Telemetry...</p>
                 <div class="nutrition-estimates">
-                    <p>TOXICITY DENSITY: <span id="est-sugar" class="heavy-value glow-text">--</span><span class="unit">g</span></p>
+                    <p>SUGAR CONTENT: <span id="est-sugar" class="heavy-value glow-text">--</span><span class="unit">g</span></p>
                     <p id="ai-reason" class="ai-reason-text"></p>
+                </div>
+                <div class="log-commit-area" id="log-commit-area" style="display:none;">
+                    <div class="meal-tag-row">
+                        <span class="meal-tag-label">MEAL TYPE:</span>
+                        <span class="meal-tag" id="inferred-meal">—</span>
+                    </div>
+                    <button id="commit-log-btn" class="cyber-btn commit-btn">
+                        <span>⊕ COMMIT TO PERSONAL LOG</span>
+                    </button>
+                    <p class="commit-help">Saves this scan to your AI model's training data</p>
                 </div>
             </div>
         </section>
-        
-        <!-- Settings Section -->
+
+        <!-- ═══════════════════════════════ INTEL ═══════════════════════════════ -->
+        <section id="intel" class="view">
+            <h2 class="section-title">Personal Intelligence</h2>
+
+            <!-- Risk Score + Today Intake row -->
+            <div class="intel-hero-row">
+                <div class="glass-panel risk-gauge-card">
+                    <p class="intel-card-label">RISK SCORE</p>
+                    <div class="gauge-container">
+                        <svg class="gauge-svg" viewBox="0 0 120 120">
+                            <circle class="gauge-track" cx="60" cy="60" r="50" />
+                            <circle class="gauge-fill" id="gauge-fill-circle" cx="60" cy="60" r="50"
+                                stroke-dasharray="314"
+                                stroke-dashoffset="314" />
+                        </svg>
+                        <div class="gauge-inner">
+                            <span class="gauge-value" id="risk-score-value">--</span>
+                            <span class="gauge-label" id="risk-score-label">LOADING</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel today-intake-card">
+                    <p class="intel-card-label">TODAY'S INTAKE</p>
+                    <p class="intake-big" id="today-sugar-big">0<span class="intake-unit">g</span></p>
+                    <div class="intake-bar-track">
+                        <div class="intake-bar-fill" id="today-intake-bar"></div>
+                    </div>
+                    <p class="intake-limit-label">50g daily limit</p>
+                    <p class="intake-scans-label"><span id="today-scan-count">0</span> scans today</p>
+                </div>
+            </div>
+
+            <!-- Weekly Trend Chart -->
+            <div class="glass-panel intel-card">
+                <p class="intel-card-label">7-DAY SUGAR TREND</p>
+                <div id="weekly-chart-container" class="weekly-chart-container">
+                    <p class="empty-intel-msg">No data yet. Start scanning food to build your trend.</p>
+                </div>
+            </div>
+
+            <!-- Vulnerability Windows -->
+            <div class="glass-panel intel-card">
+                <p class="intel-card-label">VULNERABILITY WINDOWS</p>
+                <p class="intel-sub-label">Hours where your sugar intake is historically highest</p>
+                <div id="vuln-map-container" class="vuln-map-container">
+                    <p class="empty-intel-msg">Scan at least 3 foods to activate window analysis.</p>
+                </div>
+            </div>
+
+            <!-- AI Recommendations -->
+            <div class="intel-card-bare">
+                <p class="intel-card-label" style="margin-bottom:12px;">AI RECOMMENDATIONS</p>
+                <div id="recommendations-container" class="recs-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Top Offenders -->
+            <div class="glass-panel intel-card">
+                <p class="intel-card-label">TOP SUGAR OFFENDERS</p>
+                <p class="intel-sub-label">Foods with highest cumulative sugar in your log</p>
+                <div id="top-offenders-container">
+                    <p class="empty-intel-msg">No offenders detected yet.</p>
+                </div>
+            </div>
+
+            <!-- Food Log -->
+            <div class="intel-card-bare">
+                <div class="log-header-row">
+                    <p class="intel-card-label">FOOD LOG</p>
+                    <button class="small-btn" id="clear-log-btn">CLEAR LOG</button>
+                </div>
+                <div id="food-log-container" class="food-log-container">
+                    <p class="empty-intel-msg">No entries logged yet. Scan food and commit it to your log.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════ SYS ═══════════════════════════════ -->
         <section id="settings" class="view">
             <h2 class="section-title">System Config</h2>
+
             <div class="card glass-panel settings-card">
-                <p class="subtitle">API Key is currently abstracted to the Backend Vercel Core. Environment locked.</p>
+                <h3 class="settings-group-title">API PROXY</h3>
+                <p class="subtitle">Gemini API key is secured in Vercel environment variables. Never exposed to the frontend.</p>
                 <button class="cyber-btn outline" disabled>KEY ABSTRACTED TO PROXY</button>
-                <p class="api-help">To test locally, run <code>vercel dev</code> to activate the <code>/api/gemini</code> proxy.</p>
+                <p class="api-help">Run <code>vercel dev</code> to enable <code>/api/gemini</code> locally.</p>
             </div>
 
             <div class="card glass-panel settings-card">
-                <h3 class="settings-group-title">STREAK CONTROLS</h3>
-                <p class="subtitle">Manually reset your streak if needed.</p>
-                <button id="reset-streak-btn" class="cyber-btn error-outline">RESET STREAK DATA</button>
+                <h3 class="settings-group-title">DATA CONTROLS</h3>
+                <p class="subtitle">All data is stored locally on this device. No cloud sync.</p>
+                <div class="btn-stack">
+                    <button id="export-data-btn" class="cyber-btn outline">⬇ EXPORT MY DATA (JSON)</button>
+                    <button id="reset-streak-btn" class="cyber-btn error-outline">RESET STREAK DATA</button>
+                </div>
             </div>
 
             <div class="card glass-panel settings-card">
                 <h3 class="settings-group-title">ABOUT</h3>
-                <p class="subtitle">SugarCut v1.0.0 — Built on Vercel + Gemini 2.5 Flash. Designed for personal sugar elimination tracking.</p>
+                <div class="about-block">
+                    <div class="about-logo-row">
+                        <span class="about-logo">SGR<span class="about-logo-accent">CUT</span></span>
+                        <span class="about-version-tag">v2.0 · PERSONAL INTELLIGENCE</span>
+                    </div>
+                    <p class="about-desc">
+                        A private, on-device AI metabolic system built exclusively for you.
+                        Every food scan trains your personal model — learning your eating patterns,
+                        identifying high-risk hours, and adapting its recommendations to your daily routine.
+                    </p>
+                    <div class="about-specs">
+                        <div class="spec-row">
+                            <span class="spec-key">NEURAL CORE</span>
+                            <span class="spec-val">Gemini 2.5 Flash</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">PLATFORM</span>
+                            <span class="spec-val">Vercel Edge Network</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">STORAGE</span>
+                            <span class="spec-val">Device-local (zero cloud)</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">DATA SHARING</span>
+                            <span class="spec-val neon-green-text">NONE</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">BUILT FOR</span>
+                            <span class="spec-val neon-cyan-text">YOU, EXCLUSIVELY</span>
+                        </div>
+                    </div>
+                    <p class="about-tagline">Zero sharing. Zero tracking. Pure intelligence.</p>
+                </div>
             </div>
         </section>
+
     </main>
 
+    <!-- Bottom Nav -->
     <nav class="cyber-nav glass-panel">
         <button class="nav-btn active" id="nav-dashboard" data-target="dashboard">
             <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
@@ -155,13 +295,17 @@
             </div>
             <span>SCAN</span>
         </button>
+        <button class="nav-btn" id="nav-intel" data-target="intel">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"></path></svg>
+            <span>INTEL</span>
+        </button>
         <button class="nav-btn" id="nav-settings" data-target="settings">
             <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             <span>SYS</span>
         </button>
     </nav>
 
-    <!-- Modal for Location/Time Overlays -->
+    <!-- Geo-fence Modal -->
     <div id="overlay-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-content glass-panel glow-red">
             <h2 id="modal-title" class="alert-title glow-text-red">GEO-FENCE BREACH</h2>
@@ -170,10 +314,9 @@
         </div>
     </div>
 
-    <!-- Toast notification -->
+    <!-- Toast -->
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <!-- Scripts -->
     <script src="app.js"></script>
 </body>
 </html>
